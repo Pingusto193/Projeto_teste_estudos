@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14213d">
+  <meta name="description" content="Entre na sua conta para organizar seus estudos e manter sua sequência diária.">
+  <title>Foco — Entrar</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="ambient-background" aria-hidden="true">
+    <span class="ambient-shape shape-one"></span>
+    <span class="ambient-shape shape-two"></span>
+    <span class="ambient-shape shape-three"></span>
+    <span class="ambient-dot dot-one"></span>
+    <span class="ambient-dot dot-two"></span>
+    <span class="ambient-dot dot-three"></span>
+    <span class="ambient-grid"></span>
+  </div>
+
+  <main class="login-page">
+    <section class="login-card" aria-labelledby="login-title">
+      <aside class="brand-panel">
+        <a class="brand" href="#" aria-label="Página inicial do Foco">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img">
+              <path d="M8 7.5c3.2 0 5.9 1 8 3.1 2.1-2.1 4.8-3.1 8-3.1v17c-3.2 0-5.9 1-8 3.1-2.1-2.1-4.8-3.1-8-3.1v-17Z"/>
+              <path d="M16 10.6v17"/>
+            </svg>
+          </span>
+          <span>foco</span>
+        </a>
+
+        <div class="brand-content">
+          <span class="eyebrow">Seu ritmo. Sua evolução.</span>
+          <h2>Transforme constância em resultado.</h2>
+          <p>Organize suas sessões, acompanhe seu histórico e mantenha sua sequência de estudos acesa.</p>
+
+          <div class="streak-preview" aria-label="Exemplo de sequência de estudos">
+            <div class="streak-heading">
+              <span class="flame" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M13.4 2.2c.6 3.7-2.1 5.1-2.1 7.7 0 1.1.7 1.9 1.7 1.9 1.5 0 2.4-1.4 2-3.3 2.5 1.8 4 4.4 4 7.1A7 7 0 0 1 5 15.6c0-3.4 2-6.4 5.2-8.9-.1 2.1.7 3.4 1.7 3.4.1-2.5.2-5.3 1.5-7.9Z"/>
+                </svg>
+              </span>
+              <div>
+                <strong>12 dias</strong>
+                <small>de sequência</small>
+              </div>
+            </div>
+
+            <div class="week" aria-hidden="true">
+              <span><b>S</b><i class="done">✓</i></span>
+              <span><b>T</b><i class="done">✓</i></span>
+              <span><b>Q</b><i class="done">✓</i></span>
+              <span><b>Q</b><i class="done">✓</i></span>
+              <span><b>S</b><i class="today">●</i></span>
+              <span><b>S</b><i></i></span>
+              <span><b>D</b><i></i></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="brand-quote">“Um pouco todos os dias vale mais que muito de vez em quando.”</p>
+      </aside>
+
+      <div class="form-panel">
+        <div class="mobile-brand" aria-hidden="true">
+          <span class="brand-icon">
+            <svg viewBox="0 0 32 32">
+              <path d="M8 7.5c3.2 0 5.9 1 8 3.1 2.1-2.1 4.8-3.1 8-3.1v17c-3.2 0-5.9 1-8 3.1-2.1-2.1-4.8-3.1-8-3.1v-17Z"/>
+              <path d="M16 10.6v17"/>
+            </svg>
+          </span>
+          <span>foco</span>
+        </div>
+
+        <header class="form-header">
+          <span class="welcome-tag">Bem-vindo de volta</span>
+          <h1 id="login-title">Continue de onde parou.</h1>
+          <p>Entre na sua conta para acessar seus estudos.</p>
+        </header>
+
+        <form class="login-form" action="#" method="post">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.5h16v11H4z"/>
+                <path d="m4.5 7 7.5 6 7.5-6"/>
+              </svg>
+              <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" aria-describedby="email-error" required>
+            </div>
+            <small class="field-error" id="email-error">Digite um endereço de e-mail válido.</small>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="senha">Senha</label>
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+            <div class="input-wrapper password-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+              <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" minlength="6" aria-describedby="senha-error" required>
+              <button class="password-toggle" type="button" aria-label="Mostrar senha" aria-controls="senha">
+                <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/>
+                  <circle cx="12" cy="12" r="2.5"/>
+                </svg>
+              </button>
+            </div>
+            <small class="field-error" id="senha-error">A senha deve ter pelo menos 6 caracteres.</small>
+          </div>
+
+          <label class="remember-option">
+            <input type="checkbox" name="lembrar">
+            <span class="custom-checkbox" aria-hidden="true"></span>
+            <span>Manter conectado</span>
+          </label>
+
+          <button class="login-button" type="submit">
+            <span class="button-content">
+              <span>Entrar</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M14 7l5 5-5 5"/>
+              </svg>
+            </span>
+            <span class="button-spinner" aria-hidden="true"></span>
+            <span class="button-success" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="m5 12.5 4.2 4.2L19 7"/>
+              </svg>
+            </span>
+          </button>
+
+          <p class="form-message" role="alert" aria-live="polite"></p>
+        </form>
+
+        <p class="signup-text">Ainda não tem uma conta? <a href="#">Criar conta</a></p>
+
+        <footer class="form-footer">
+          <span>© 2026 Foco</span>
+          <a href="#">Privacidade</a>
+          <a href="#">Termos</a>
+        </footer>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

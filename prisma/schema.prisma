@@ -11,3 +11,51 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id               Int          @id @default(autoincrement())
+  nome             String
+  senha            String
+  email            String       @unique
+  Estudos          Estudos[]
+  Fogo             Fogo[]
+  pedidosEnviados  Friendship[] @relation("Requester")
+  pedidosRecebidos Friendship[] @relation("Addressee")
+}
+
+model Estudos {
+  id      Int      @id @default(autoincrement())
+  materia String
+  horas   Int
+  start   DateTime @default(now())
+  User_id Int
+  user    User     @relation(fields: [User_id], references: [id])
+}
+
+model Fogo {
+  id          Int  @id @default(autoincrement())
+  fogo_atual  Int
+  fogo_maximo Int
+  User_id     Int
+  user        User @relation(fields: [User_id], references: [id])
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model Friendship {
+  id          Int              @id @default(autoincrement())
+  requesterId Int
+  addresseeId Int
+  status      FriendshipStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+
+  requester User @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee User @relation("Addressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId])
+}
