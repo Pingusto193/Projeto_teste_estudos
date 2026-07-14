@@ -1,11 +1,25 @@
 import express from "express";
 import cors from "cors";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { prisma } from "./prisma.ts";
+import * as argon2 from "argon2";
 
 const app = express();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const frontEndPath = path.resolve(__dirname, "../../../Front-end");
+
 app.use(cors());
 app.use(express.json());
+app.use(express.static(frontEndPath));
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(frontEndPath, "login", "login.html"));
+});
+
+app.get("/cadastro", (req, res) => {
+  res.sendFile(path.join(frontEndPath, "Sign Up", "sign_up.html"));
+});
 const PORT = 3000;
 
 app.get("/user", async (req, res) => {
@@ -39,7 +53,8 @@ app.post("/user", async (req, res) => {
       data: {
         nome,
         email,
-        senha
+        senha,
+        telefone
       }
     });
     res.status(201).json(user);
@@ -75,7 +90,8 @@ app.put("/user/:id", async (req, res) => {
       data: {
         nome,
         email,
-        senha
+        senha,
+        telefone
       }
     });
     res.json(user);
@@ -192,5 +208,155 @@ app.delete("/user/:userId/fogos/:fogoId", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro ao excluir fogo" });
+  }
+});
+
+// parte dos amigos-------------------------------------------------------
+app.get("/user/:userId/pedidos", async (req, res) => {
+  const userId = Number(req.params.userId);
+
+  try {
+    const pedidos = await prisma.friendship.findMany({
+      where: {
+        addresseeId: userId,
+        status: "PENDING"
+      },
+      include: {
+        requester: {
+          select: {
+            id: true,
+            nome: true,
+            email: true
+          }
+        }
+      }
+    });
+
+    res.json(pedidos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Erro ao buscar pedidos"
+    });
+  }
+});
+
+app.post("/user/:userId/amigos/:amigoId", async (req, res) => {
+  const requesterId = Number(req.params.userId);
+  const addresseeId = Number(req.params.amigoId);
+
+  try {
+    if (requesterId === addresseeId) {
+      return res.status(400).json({
+        error: "Você não pode adicionar a si mesmo"
+      });
+    }
+
+    // Procura amizade ou pedido nos dois sentidos
+    const existente = await prisma.friendship.findFirst({
+      where: {
+        OR: [
+          { requesterId, addresseeId },
+          {
+            requesterId: addresseeId,
+            addresseeId: requesterId
+          }
+        ]
+      }
+    });
+
+    if (existente) {
+      return res.status(409).json({
+        error: "Já existe uma amizade ou pedido entre esses usuários"
+      });
+    }
+
+    const pedido = await prisma.friendship.create({
+      data: {
+        requesterId,
+        addresseeId
+        // status começa como PENDING automaticamente
+      }
+    });
+
+    res.status(201).json(pedido);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Erro ao enviar pedido de amizade"
+    });
+  }
+});
+
+app.put("/user/:userId/pedidos/:pedidoId/aceitar", async (req, res) => {
+  const userId = Number(req.params.userId);
+  const pedidoId = Number(req.params.pedidoId);
+
+  try {
+    const resultado = await prisma.friendship.updateMany({
+      where: {
+        id: pedidoId,
+        addresseeId: userId,
+        status: "PENDING"
+      },
+      data: {
+        status: "ACCEPTED"
+      }
+    });
+
+    if (resultado.count === 0) {
+      return res.status(404).json({
+        error: "Pedido pendente não encontrado"
+      });
+    }
+
+    const amizade = await prisma.friendship.findUnique({
+      where: {
+        id: pedidoId
+      }
+    });
+
+    res.json(amizade);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Erro ao aceitar pedido"
+    });
+  }
+});
+app.put("/user/:userId/pedidos/:pedidoId/recusar", async (req, res) => {
+  const userId = Number(req.params.userId);
+  const pedidoId = Number(req.params.pedidoId);
+
+  try {
+    const resultado = await prisma.friendship.updateMany({
+      where: {
+        id: pedidoId,
+        addresseeId: userId,
+        status: "PENDING"
+      },
+      data: {
+        status: "REJECTED"
+      }
+    });
+
+    if (resultado.count === 0) {
+      return res.status(404).json({
+        error: "Pedido pendente não encontrado"
+      });
+    }
+
+    const amizade = await prisma.friendship.findUnique({
+      where: {
+        id: pedidoId
+      }
+    });
+
+    res.json(amizade);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: "Erro ao recusar pedido"
+    });
   }
 });

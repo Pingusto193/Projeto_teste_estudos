@@ -17,10 +17,11 @@ model User {
   nome             String
   senha            String
   email            String       @unique
+  telefone         String
   Estudos          Estudos[]
   Fogo             Fogo[]
-  pedidosEnviados  Friendship[] @relation("Requester")
-  pedidosRecebidos Friendship[] @relation("Addressee")
+  pedidosEnviados  amigos[] @relation("Requester")
+  pedidosRecebidos amigos[] @relation("Addressee")
 }
 
 model Estudos {
@@ -40,18 +41,18 @@ model Fogo {
   user        User @relation(fields: [User_id], references: [id])
 }
 
-enum FriendshipStatus {
+enum amigosStatus {
   PENDING
   ACCEPTED
   REJECTED
 }
 
-model Friendship {
+model amigos {
   id          Int              @id @default(autoincrement())
   requesterId Int
   addresseeId Int
-  status      FriendshipStatus @default(PENDING)
-  createdAt   DateTime         @default(now())
+  status      amigosStatus @default(PENDING)
+  start   DateTime         @default(now())
 
   requester User @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
   addressee User @relation("Addressee", fields: [addresseeId], references: [id], onDelete: Cascade)

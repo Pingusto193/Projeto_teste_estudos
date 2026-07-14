@@ -1,0 +1,526 @@
+/* ===== Fonte personalizada =====
+   Carrega o arquivo colocado na pasta Fontes_texto. */
+@font-face {
+  font-family: "Montserrat";
+  src: url("../Fontes_texto/Montserrat-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* ===== Variáveis do projeto =====
+   Centralizam cores, bordas e sombras para facilitar futuras alterações. */
+:root {
+  --color-primary: #14213d;
+  --color-primary-hover: #1d3768;
+  --color-secondary: #2f80ed;
+  --color-secondary-light: #55a0ff;
+  --color-background: #f5f8fc;
+  --color-surface: #ffffff;
+  --color-text: #172033;
+  --color-line: #dbe3ee;
+  --color-success: #2f9e44;
+  --color-error: #e03131;
+  --radius-md: 12px;
+  --radius-xl: 28px;
+  --shadow-card: 0 24px 70px rgba(20, 33, 61, 0.16);
+}
+
+/* ===== Reset e configurações gerais =====
+   Remove margens automáticas e deixa o cálculo de tamanhos previsível. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 10% 15%, rgba(47, 128, 237, 0.13), transparent 28rem),
+    radial-gradient(circle at 92% 90%, rgba(255, 159, 28, 0.11), transparent 24rem),
+    var(--color-background);
+  font-family: "Montserrat", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Faz botões e campos usarem a mesma fonte do restante da página. */
+button,
+input {
+  font: inherit;
+}
+
+/* ===== Posicionamento da página =====
+   Ocupa toda a tela e mantém o cartão exatamente no centro. */
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+/* ===== Caixa de login =====
+   Controla tamanho, fundo, bordas, sombra e animação do cartão. */
+.login-card {
+  width: min(560px, 100%);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid rgba(20, 33, 61, 0.08);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  animation: card-arrival 700ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+  transition: box-shadow 300ms ease, transform 300ms ease;
+}
+
+.login-card:hover {
+  box-shadow: 0 30px 85px rgba(20, 33, 61, 0.19);
+  transform: translateY(-3px);
+}
+
+/* Adiciona espaço interno entre o formulário e as bordas do cartão. */
+.form-panel {
+  padding: 62px 52px;
+}
+
+/* ===== Título ===== */
+.form-header {
+  margin-bottom: 38px;
+}
+
+.form-header h1 {
+  font-size: clamp(36px, 4vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+}
+
+/* ===== Organização do formulário =====
+   O grid cria um espaço uniforme entre campos, botão e mensagens. */
+.login-form {
+  display: grid;
+  gap: 24px;
+}
+
+/* Esta classe pode ser adicionada pelo JavaScript quando houver erro. */
+.login-form.shake {
+  animation: shake 480ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Agrupa o rótulo, o campo e sua mensagem de validação. */
+.form-group {
+  display: grid;
+  gap: 10px;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.form-group label,
+.label-row {
+  font-size: 15px;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Link para recuperação de senha, exibido ao lado do rótulo Senha. */
+.forgot-link {
+  color: #1d64bd;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ===== Campos de e-mail e senha ===== */
+.input-wrapper {
+  position: relative;
+}
+
+/* Posiciona o ícone à esquerda, dentro do campo. */
+.input-wrapper > svg {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  width: 21px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: #8a9691;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 58px;
+  min-width: 0;
+  padding: 0 16px 0 49px;
+  color: var(--color-text);
+  background: #fbfcfb;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  text-overflow: ellipsis;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.input-wrapper input::placeholder {
+  color: #a2aba7;
+}
+
+/* Destaca o campo que está sendo preenchido. */
+.input-wrapper input:focus {
+  background: #fff;
+  border-color: var(--color-secondary-light);
+  box-shadow: 0 0 0 4px rgba(47, 128, 237, 0.13);
+}
+
+.input-wrapper input:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Mantém a mesma cor de fundo quando o navegador preenche o campo sozinho. */
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text);
+  -webkit-box-shadow: 0 0 0 1000px #fbfcfb inset;
+  box-shadow: 0 0 0 1000px #fbfcfb inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Reserva espaço à direita da senha para o botão com ícone de olho. */
+.password-wrapper input {
+  padding-right: 56px;
+}
+
+/* ===== Botão de mostrar/esconder senha ===== */
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #7c8983;
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.password-toggle:hover {
+  color: #1d64bd;
+  background: #eaf2ff;
+}
+
+.password-toggle:focus-visible {
+  outline: 3px solid rgba(47, 128, 237, 0.22);
+  outline-offset: 1px;
+}
+
+.password-toggle svg {
+  position: static;
+  width: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  transform: none;
+}
+
+/* O atributo aria-pressed define qual dos dois ícones de olho aparece. */
+.password-toggle .eye-open {
+  display: block;
+}
+
+.password-toggle .eye-closed {
+  display: none;
+}
+
+.password-toggle[aria-pressed="true"] .eye-open {
+  display: none;
+}
+
+.password-toggle[aria-pressed="true"] .eye-closed {
+  display: block;
+}
+
+/* ===== Validação dos campos =====
+   A mensagem fica escondida até o navegador ou o JavaScript detectar erro. */
+.field-error {
+  max-height: 0;
+  overflow: hidden;
+  color: var(--color-error);
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: max-height 180ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+.form-group:has(input:user-invalid) .field-error,
+.form-group:has(input:not(:placeholder-shown):invalid) .field-error,
+.form-group.is-invalid .field-error {
+  max-height: 24px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-group:has(input:user-invalid) .input-wrapper input,
+.form-group:has(input:not(:placeholder-shown):invalid) .input-wrapper input,
+.form-group.is-invalid .input-wrapper input {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 4px rgba(224, 49, 49, 0.09);
+}
+
+/* ===== Botão Entrar ===== */
+.login-button {
+  position: relative;
+  width: 100%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #fff;
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: 0 9px 20px rgba(20, 33, 61, 0.2);
+  font-size: 16px;
+  cursor: pointer;
+  transition: width 340ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 340ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.login-button:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 12px 24px rgba(20, 33, 61, 0.26);
+  transform: translateY(-1px);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0) scaleX(0.96);
+}
+
+.login-button:focus-visible {
+  outline: 4px solid rgba(47, 128, 237, 0.25);
+  outline-offset: 2px;
+}
+
+.login-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Conteúdo normal do botão: texto Entrar e seta. */
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  white-space: nowrap;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.button-content svg,
+.button-success svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* Ícones usados enquanto o login carrega ou termina com sucesso. */
+.button-spinner,
+.button-success {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.button-spinner::before {
+  width: 21px;
+  height: 21px;
+  content: "";
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+/* O JavaScript pode adicionar estas classes durante o envio do formulário. */
+.login-button.is-loading,
+.login-button.is-success {
+  width: 58px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.login-button.is-loading .button-content,
+.login-button.is-success .button-content {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.login-button.is-loading .button-spinner,
+.login-button.is-success .button-success {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.login-button.is-success {
+  background: var(--color-success);
+}
+
+/* Mensagem geral mostrada abaixo do botão. */
+.form-message {
+  min-height: 18px;
+  color: var(--color-error);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ===== Acesso à tela de cadastro =====
+   Separa visualmente a ação secundária do formulário de login. */
+.signup-action {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+  color: #687386;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-button {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  background: #fff;
+  border: 1px solid #cbd7e6;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.signup-button:hover {
+  background: #f4f7fb;
+  border-color: #9eb2ca;
+  transform: translateY(-1px);
+}
+
+.signup-button:focus-visible,
+.forgot-link:focus-visible {
+  outline: 3px solid rgba(47, 128, 237, 0.25);
+  outline-offset: 2px;
+}
+
+/* ===== Animações ===== */
+@keyframes card-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+/* ===== Responsividade para celulares =====
+   Em telas pequenas o cartão ocupa a tela e reduz o espaço lateral. */
+@media (max-width: 560px) {
+  .login-page {
+    display: block;
+    padding: 0;
+    background: var(--color-surface);
+  }
+
+  .login-card {
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .login-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .form-panel {
+    padding: 48px 22px 24px;
+  }
+
+  .form-header h1 {
+    font-size: 36px;
+  }
+}
+
+/* ===== Acessibilidade =====
+   Desativa movimentos para quem prefere animações reduzidas no sistema. */
+@media (prefers-reduced-motion: reduce) {
+  .login-card,
+  .button-spinner::before,
+  .login-form.shake {
+    animation: none;
+  }
+
+  .login-card,
+  .login-button,
+  .input-wrapper input,
+  .password-toggle,
+  .field-error {
+    transition: none;
+  }
+
+  .login-card:hover {
+    transform: none;
+  }
+}

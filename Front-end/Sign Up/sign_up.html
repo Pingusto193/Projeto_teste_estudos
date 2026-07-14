@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Configurações básicas e adaptação da página para celulares. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14213d">
+  <meta name="description" content="Crie sua conta no Flinxgu.">
+
+  <!-- Ícone exibido na aba do navegador. -->
+  <link rel="icon" type="image/png" href="../Fotos/86339240-b0dc-45f5-89c9-55a1a69593fa.png">
+  <title>Flinxgu — Criar conta</title>
+
+  <!-- Estilos exclusivos da tela de cadastro. -->
+  <link rel="stylesheet" href="sign_up.css">
+</head>
+<body>
+  <!-- Área principal que centraliza o cartão de cadastro. -->
+  <main class="login-page signup-page">
+    <section class="login-card signup-card" aria-labelledby="signup-title">
+      <div class="form-panel signup-panel">
+        <!-- Título e explicação da tela. -->
+        <header class="form-header signup-header">
+          <h1 id="signup-title">Criar conta</h1>
+          <p>Preencha seus dados para começar.</p>
+        </header>
+
+        <!-- Formulário de criação de conta. -->
+        <form class="login-form signup-form" action="#" method="post" novalidate>
+          <!-- Nome que identificará o usuário. -->
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+              </svg>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Digite seu nome"
+                autocomplete="name"
+                minlength="2"
+                aria-describedby="nome-error"
+                required
+              >
+            </div>
+            <small class="field-error" id="nome-error">Digite seu nome completo.</small>
+          </div>
+
+          <!-- E-mail usado para acessar a conta. -->
+          <div class="form-group">
+            <label for="email-cadastro">E-mail</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.5h16v11H4z"/>
+                <path d="m4.5 7 7.5 6 7.5-6"/>
+              </svg>
+              <input
+                type="email"
+                id="email-cadastro"
+                name="email"
+                placeholder="email@exemplo.com"
+                autocomplete="email"
+                inputmode="email"
+                autocapitalize="off"
+                spellcheck="false"
+                aria-describedby="email-cadastro-error"
+                required
+              >
+            </div>
+            <small class="field-error" id="email-cadastro-error">Digite um endereço de e-mail válido.</small>
+          </div>
+          <!-- Telefone do usuário. -->
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.5 12.5h11M12 7v10"/>
+              </svg>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(00) 00000-0000"
+                autocomplete="tel"
+                inputmode="tel"
+                aria-describedby="telefone-error"
+              >
+            </div>
+            <small class="field-error" id="telefone-error">Digite um número de telefone válido.</small>
+          </div>
+
+          <!-- Senha da nova conta. -->
+          <div class="form-group">
+            <label for="senha-cadastro">Senha</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+              <input
+                type="password"
+                id="senha-cadastro"
+                name="senha"
+                placeholder="Crie uma senha"
+                autocomplete="new-password"
+                minlength="6"
+                aria-describedby="senha-cadastro-error"
+                required
+              >
+            </div>
+            <small class="field-error" id="senha-cadastro-error">Use pelo menos 6 caracteres.</small>
+          </div>
+
+          <!-- Confirmação para evitar que a senha seja digitada incorretamente. -->
+          <div class="form-group">
+            <label for="confirmar-senha">Confirmar senha</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+              <input
+                type="password"
+                id="confirmar-senha"
+                name="confirmarSenha"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+                minlength="6"
+                aria-describedby="confirmar-senha-error"
+                required
+              >
+            </div>
+            <small class="field-error" id="confirmar-senha-error">As senhas precisam ser iguais.</small>
+          </div>
+
+          <!-- Botão principal do cadastro. -->
+          <button class="login-button" type="submit">
+            <span class="button-content">
+              <span>Criar conta</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M14 7l5 5-5 5"/>
+              </svg>
+            </span>
+            <span class="button-spinner" aria-hidden="true"></span>
+            <span class="button-success" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="m5 12.5 4.2 4.2L19 7"/>
+              </svg>
+            </span>
+          </button>
+
+          <!-- Espaço reservado para mensagens gerais do cadastro. -->
+          <p class="form-message" role="alert" aria-live="polite"></p>
+        </form>
+
+        <!-- Volta para a tela de login quando a conta já existe. -->
+        <p class="back-to-login">Já tem uma conta? <a href="../login/login.html">Entrar</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Arquivo reservado para a lógica do cadastro; permanece vazio por enquanto. -->
+  <script src="sign_up.js" defer></script>
+</body>
+</html>

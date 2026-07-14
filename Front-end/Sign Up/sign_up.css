@@ -1,0 +1,64 @@
+/* Reutiliza a identidade visual e os componentes da tela de login. */
+@import url("../login/login.css");
+
+/* ===== Caixa de cadastro =====
+   Um pouco mais larga para acomodar os quatro campos confortavelmente. */
+.signup-card {
+  width: min(620px, 100%);
+}
+
+.signup-panel {
+  padding: 50px 52px;
+}
+
+/* ===== Cabeçalho ===== */
+.signup-header {
+  margin-bottom: 30px;
+}
+
+.signup-header p {
+  margin-top: 10px;
+  color: #687386;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Reduz levemente o espaço entre os campos para manter o cartão equilibrado. */
+.signup-form {
+  gap: 18px;
+}
+
+/* ===== Retorno ao login ===== */
+.back-to-login {
+  margin-top: 24px;
+  color: #687386;
+  font-size: 14px;
+  text-align: center;
+}
+
+.back-to-login a {
+  color: #1d64bd;
+  text-decoration: none;
+}
+
+.back-to-login a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.back-to-login a:focus-visible {
+  outline: 3px solid rgba(47, 128, 237, 0.25);
+  outline-offset: 2px;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 560px) {
+  .signup-panel {
+    padding: 42px 22px 28px;
+  }
+
+  .signup-header h1 {
+    font-size: 34px;
+  }
+}
