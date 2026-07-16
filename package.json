@@ -20,7 +20,19 @@
   "keywords": [],
   "type": "module",
   "devDependencies": {
+    "@types/node": "^26.1.1",
+    "dotenv": "^17.4.2",
     "nodemon": "^3.1.14",
     "prisma": "^7.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pingusto193/Projeto_teste_estudos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pingusto193/Projeto_teste_estudos/issues"
+  },
+  "homepage": "https://github.com/Pingusto193/Projeto_teste_estudos#readme"
 }

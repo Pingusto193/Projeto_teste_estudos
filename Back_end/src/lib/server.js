@@ -13,13 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(frontEndPath));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(frontEndPath, "login", "login.html"));
-});
-
-app.get("/cadastro", (req, res) => {
-  res.sendFile(path.join(frontEndPath, "Sign Up", "sign_up.html"));
-});
 const PORT = 3000;
 
 app.get("/user", async (req, res) => {
@@ -47,7 +40,7 @@ app.get("/user/:id", async (req, res) => {
 });
 
 app.post("/user", async (req, res) => {
-  const { nome, email, senha } = req.body;
+  const { nome, email, senha, telefone } = req.body;
   try {
     const user = await prisma.user.create({
       data: {
