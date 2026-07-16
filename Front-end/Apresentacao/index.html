@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14213d">
+  <meta
+    name="description"
+    content="Planeje seus horários, registre sessões de estudo e acompanhe o tempo dedicado a cada matéria no Flinxgu."
+  >
+
+  <link rel="icon" type="image/png" href="../Fotos/86339240-b0dc-45f5-89c9-55a1a69593fa.png">
+  <link rel="stylesheet" href="apresentacao.css">
+
+  <title>Flinxgu — Planejamento e acompanhamento de estudos</title>
+</head>
+<body>
+  <!-- Cabeçalho simples, sem links que repetem as seções da página. -->
+  <header class="cabecalho">
+    <div class="limite cabecalho-conteudo">
+      <a class="marca" href="#inicio" aria-label="Voltar ao início">
+        <span class="marca-icone">
+          <img
+            src="../Fotos/86339240-b0dc-45f5-89c9-55a1a69593fa.png"
+            alt=""
+          >
+        </span>
+        <span>Flinxgu</span>
+      </a>
+
+      <div class="acoes-cabecalho">
+        <a class="botao botao-entrar" href="../login/login.html">Entrar</a>
+        <a class="botao botao-principal botao-cabecalho" href="../Sign%20Up/sign_up.html">
+          Criar conta
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Apresentação principal e demonstração animada do cronômetro. -->
+    <section class="secao-inicial" id="inicio">
+      <div class="limite grade-inicial">
+        <div class="conteudo-inicial">
+          <span class="etiqueta">Planejamento e registro de estudos</span>
+
+          <h1>Planeje sua semana e registre cada sessão de estudo.</h1>
+
+          <p>
+            No Flinxgu, você escolhe as matérias e os horários da sua rotina,
+            usa um cronômetro durante o estudo e consulta quanto tempo dedicou
+            a cada conteúdo.
+          </p>
+        </div>
+
+        <!--
+          Esta é apenas uma demonstração visual.
+          O JavaScript anima o tempo, a barra e o botão, sem registrar dados reais.
+        -->
+        <article
+          class="demonstracao-cronometro"
+          id="demonstracao-cronometro"
+          data-duracao-minutos="15"
+          aria-label="Demonstração visual de uma sessão de estudos"
+        >
+          <div class="topo-demonstracao">
+            <div>
+              <span class="rotulo-demonstracao">Demonstração do cronômetro</span>
+              <h2>Sessão de Matemática</h2>
+            </div>
+
+            <span class="estado-demonstracao" id="estado-demonstracao">
+              <i aria-hidden="true"></i>
+              <span id="texto-estado-demonstracao">Em andamento</span>
+            </span>
+          </div>
+
+          <div class="materia-demonstracao">
+            <span class="icone-materia">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"/>
+              </svg>
+            </span>
+            <span>
+              <small>Matéria selecionada</small>
+              <strong>Matemática</strong>
+            </span>
+            <span class="duracao-planejada">15 minutos</span>
+          </div>
+
+          <div class="area-tempo">
+            <span
+              class="tempo-demonstracao"
+              id="tempo-demonstracao"
+              aria-hidden="true"
+            >00:00</span>
+            <small>de 15:00</small>
+          </div>
+
+          <div
+            class="trilho-progresso"
+            role="progressbar"
+            aria-label="Progresso da sessão de demonstração"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <span id="progresso-demonstracao"></span>
+          </div>
+
+          <div class="marcadores-tempo" aria-hidden="true">
+            <span>00:00</span>
+            <span>05:00</span>
+            <span>10:00</span>
+            <span>15:00</span>
+          </div>
+
+          <div class="area-controle">
+            <span class="ponteiro-demonstracao" id="indicador-finalizar" aria-hidden="true">
+              <svg viewBox="0 0 32 38">
+                <path d="M3 3v27.5l7.2-7 5.2 11.3 5.2-2.4-5.1-11.1h10.4L3 3Z"/>
+              </svg>
+            </span>
+
+            <button
+              class="botao-controle"
+              id="botao-demonstracao"
+              type="button"
+              tabindex="-1"
+              aria-label="Botão da demonstração visual, sem ação real"
+            >
+              <span class="icone-botao-controle">
+                <svg class="icone-pausa" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14M16 5v14"/>
+                </svg>
+                <svg class="icone-concluir" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m5 12 4 4 10-10"/>
+                </svg>
+              </span>
+              <span id="texto-botao-demonstracao">Pausar sessão</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Três explicações completas sobre o funcionamento real da plataforma. -->
+    <section class="secao secao-como-funciona" id="como-funciona">
+      <div class="limite">
+        <div class="cabecalho-secao revelar">
+          <span class="etiqueta">Como funciona</span>
+          <h2>Da escolha da matéria ao acompanhamento dos resultados.</h2>
+          <p>
+            Escolha o que estudar, distribua as matérias na semana e consulte
+            os registros de cada sessão no mesmo painel.
+          </p>
+        </div>
+
+        <div class="grade-funcionamento">
+          <article class="bloco-funcionamento revelar">
+            <div class="topo-bloco">
+              <span class="numero-bloco">01</span>
+              <span class="icone-bloco">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="13" r="8"/>
+                  <path d="M9 2h6M12 5v2M12 13l3-3"/>
+                </svg>
+              </span>
+            </div>
+
+            <h3>Escolha o que estudar</h3>
+            <p>
+              Selecione uma matéria, informe quanto tempo pretende dedicar. O cronômetro registra o período estudado
+              até você pausar ou finalizar.
+            </p>
+
+            <div class="exemplo-escolha" aria-hidden="true">
+              <div>
+                <small>Matéria</small>
+                <strong>Física</strong>
+              </div>
+              <span></span>
+              <div>
+                <small>Tempo</small>
+                <strong>50 min</strong>
+              </div>
+              <i>
+                <svg viewBox="0 0 24 24">
+                  <path d="m9 7 8 5-8 5V7Z"/>
+                </svg>
+              </i>
+            </div>
+          </article>
+
+          <article class="bloco-funcionamento revelar">
+            <div class="topo-bloco">
+              <span class="numero-bloco">02</span>
+              <span class="icone-bloco">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="16" rx="2"/>
+                  <path d="M8 3v4M16 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+                </svg>
+              </span>
+            </div>
+
+            <h3>Organize sua rotina</h3>
+            <p>
+              Informe em quais dias consegue estudar, quanto tempo tem
+              disponível e quais matérias fazem parte da semana. Com esses
+              dados, o calendário distribui as sessões de acordo com a sua
+              disponibilidade.
+            </p>
+
+            <div class="exemplo-dias" aria-hidden="true">
+              <span class="dia-selecionado">S</span>
+              <span>T</span>
+              <span class="dia-selecionado">Q</span>
+              <span>Q</span>
+              <span class="dia-selecionado">S</span>
+              <span class="dia-selecionado">S</span>
+              <span>D</span>
+            </div>
+          </article>
+
+          <article class="bloco-funcionamento revelar">
+            <div class="topo-bloco">
+              <span class="numero-bloco">03</span>
+              <span class="icone-bloco">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
+                </svg>
+              </span>
+            </div>
+
+            <h3>Acompanhe o que foi registrado</h3>
+            <p>
+              As sessões concluídas aparecem no histórico e nos gráficos,
+              organizadas por matéria, dia, semana e mês.
+            </p>
+
+            <div class="exemplo-registro" aria-hidden="true">
+              <span style="--altura: 45%"></span>
+              <span style="--altura: 72%"></span>
+              <span style="--altura: 58%"></span>
+              <span style="--altura: 88%"></span>
+              <span style="--altura: 66%"></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demonstração visual do planejamento semanal. -->
+    <section class="secao secao-calendario" id="calendario">
+      <div class="limite grade-calendario">
+        <div class="conteudo-calendario revelar">
+          <span class="etiqueta">Calendário semanal</span>
+          <h2>Veja quando e o que está planejado para cada dia.</h2>
+          <p>
+            As matérias aparecem nos dias e horários definidos para a rotina,
+            deixando a semana inteira visível em um único quadro.
+          </p>
+
+          <dl class="dados-rotina">
+            <div>
+              <dt>Dias escolhidos</dt>
+              <dd>Segunda, quarta, sexta e sábado</dd>
+            </div>
+            <div>
+              <dt>Tempo disponível</dt>
+              <dd>1h30 nos dias úteis e 2h no sábado</dd>
+            </div>
+            <div>
+              <dt>Matérias</dt>
+              <dd>Matemática, Física, Química, Português e História</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="painel-calendario revelar" aria-label="Exemplo visual de calendário semanal">
+          <div class="topo-calendario">
+            <div>
+              <small>Planejamento</small>
+              <strong>Semana de 13 a 19 de julho</strong>
+            </div>
+            <span>4 dias de estudo</span>
+          </div>
+
+          <div class="cabecalho-dias">
+            <span>Horário</span>
+            <span><small>SEG</small><strong>13</strong></span>
+            <span><small>QUA</small><strong>15</strong></span>
+            <span><small>SEX</small><strong>17</strong></span>
+            <span><small>SÁB</small><strong>18</strong></span>
+          </div>
+
+          <div class="grade-horarios">
+            <span class="horario">18:00</span>
+            <article class="evento evento-azul">
+              <strong>Matemática</strong>
+              <small>18:00 — 18:50</small>
+            </article>
+            <span class="espaco-vazio"></span>
+            <article class="evento evento-roxo">
+              <strong>Português</strong>
+              <small>18:00 — 18:45</small>
+            </article>
+            <span class="espaco-vazio"></span>
+
+            <span class="horario">19:00</span>
+            <article class="evento evento-laranja">
+              <strong>Física</strong>
+              <small>19:00 — 19:40</small>
+            </article>
+            <article class="evento evento-verde">
+              <strong>Química</strong>
+              <small>19:00 — 19:50</small>
+            </article>
+            <span class="espaco-vazio"></span>
+            <span class="espaco-vazio"></span>
+
+            <span class="horario">09:00</span>
+            <span class="espaco-vazio"></span>
+            <span class="espaco-vazio"></span>
+            <span class="espaco-vazio"></span>
+            <article class="evento evento-cinza">
+              <strong>História</strong>
+              <small>09:00 — 10:00</small>
+            </article>
+
+            <span class="horario">10:00</span>
+            <span class="espaco-vazio"></span>
+            <span class="espaco-vazio"></span>
+            <span class="espaco-vazio"></span>
+            <article class="evento evento-azul">
+              <strong>Matemática</strong>
+              <small>10:15 — 11:00</small>
+            </article>
+          </div>
+
+          <div class="legenda-calendario">
+            <span><i class="cor-azul"></i>Matemática</span>
+            <span><i class="cor-laranja"></i>Física</span>
+            <span><i class="cor-verde"></i>Química</span>
+            <span><i class="cor-roxa"></i>Português</span>
+            <span><i class="cor-cinza"></i>História</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recursos sociais e sequência de dias estudados. -->
+    <section class="secao secao-social" id="amigos-e-sequencia">
+      <div class="limite">
+        <div class="cabecalho-secao revelar">
+          <span class="etiqueta">Amigos e sequência</span>
+          <h2>Compartilhe a frequência, não apenas o total de horas.</h2>
+          <p>
+            Compare regularidade, metas concluídas e dias estudados sem reduzir
+            o acompanhamento a uma disputa por minutos.
+          </p>
+        </div>
+
+        <div class="grade-social">
+          <article class="painel-amigos revelar">
+            <div class="titulo-painel">
+              <div>
+                <small>Visão dos amigos</small>
+                <h3>Consistência nesta semana</h3>
+              </div>
+              <span>4 amigos</span>
+            </div>
+
+            <div class="cabecalho-lista-amigos">
+              <span>Amigo</span>
+              <span>Dias</span>
+              <span>Metas</span>
+              <span>Frequência</span>
+            </div>
+
+            <div class="lista-amigos">
+              <div class="linha-amigo">
+                <span class="identidade-amigo">
+                  <i class="avatar avatar-azul">AM</i>
+                  <strong>Ana Martins</strong>
+                </span>
+                <span>5 de 5</span>
+                <span>4 de 4</span>
+                <span class="frequencia">
+                  <i><b style="--largura: 100%"></b></i>
+                  100%
+                </span>
+              </div>
+
+              <div class="linha-amigo linha-usuario">
+                <span class="identidade-amigo">
+                  <i class="avatar avatar-escuro">LC</i>
+                  <strong>Lucas <small>Você</small></strong>
+                </span>
+                <span>4 de 4</span>
+                <span>3 de 4</span>
+                <span class="frequencia">
+                  <i><b style="--largura: 86%"></b></i>
+                  86%
+                </span>
+              </div>
+
+              <div class="linha-amigo">
+                <span class="identidade-amigo">
+                  <i class="avatar avatar-roxo">JP</i>
+                  <strong>João Pedro</strong>
+                </span>
+                <span>3 de 4</span>
+                <span>3 de 3</span>
+                <span class="frequencia">
+                  <i><b style="--largura: 75%"></b></i>
+                  75%
+                </span>
+              </div>
+
+              <div class="linha-amigo">
+                <span class="identidade-amigo">
+                  <i class="avatar avatar-laranja">MS</i>
+                  <strong>Marina Silva</strong>
+                </span>
+                <span>3 de 5</span>
+                <span>2 de 4</span>
+                <span class="frequencia">
+                  <i><b style="--largura: 60%"></b></i>
+                  60%
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="painel-sequencia revelar">
+            <div class="topo-sequencia">
+              <span class="icone-fogo">
+                <img src="../Fotos/fogo-sequencia.png" alt="">
+              </span>
+              <span>
+                <small>Sequência atual</small>
+                <strong>12 dias</strong>
+              </span>
+            </div>
+
+            <div class="dias-sequencia" aria-label="Últimos sete dias estudados">
+              <span><i class="dia-concluido"></i><small>SEG</small></span>
+              <span><i class="dia-concluido"></i><small>TER</small></span>
+              <span><i class="dia-concluido"></i><small>QUA</small></span>
+              <span><i class="dia-concluido"></i><small>QUI</small></span>
+              <span><i class="dia-concluido"></i><small>SEX</small></span>
+              <span><i class="dia-concluido"></i><small>SÁB</small></span>
+              <span><i class="dia-atual"></i><small>DOM</small></span>
+            </div>
+
+            <div class="resumo-sequencia">
+              <span>
+                <small>Maior sequência</small>
+                <strong>18 dias</strong>
+              </span>
+              <span>
+                <small>Sessões no período</small>
+                <strong>21 sessões</strong>
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Painel com dados coerentes de demonstração. -->
+    <section class="secao secao-estatisticas" id="estatisticas">
+      <div class="limite">
+        <div class="cabecalho-estatisticas revelar">
+          <div>
+            <span class="etiqueta">Gráficos e estatísticas</span>
+            <h2>Acompanhe seu ritmo de estudos.</h2>
+          </div>
+          <p>
+            Consulte o tempo por matéria, a distribuição durante a semana e a
+            frequência da rotina em um painel único.
+          </p>
+        </div>
+
+        <div class="painel-estatisticas revelar">
+          <div class="resumos-estatisticas">
+            <article>
+              <small>Tempo na semana</small>
+              <strong>8h 40min</strong>
+              <span>520 minutos registrados</span>
+            </article>
+            <article>
+              <small>Sessões concluídas</small>
+              <strong>12</strong>
+              <span>Média de 43 minutos</span>
+            </article>
+            <article>
+              <small>Frequência planejada</small>
+              <strong>4 de 4 dias</strong>
+              <span>Planejamento cumprido</span>
+            </article>
+            <article>
+              <small>Sequências</small>
+              <strong>12 dias</strong>
+              <span>Maior sequência: 18 dias</span>
+            </article>
+          </div>
+
+          <div class="grade-graficos">
+            <article class="grafico grafico-dias">
+              <div class="titulo-grafico">
+                <span>
+                  <small>Tempo por dia</small>
+                  <h3>Semana atual</h3>
+                </span>
+                <span class="unidade-grafico">minutos</span>
+              </div>
+
+              <div class="area-grafico-barras">
+                <span class="linha-referencia linha-100"><i>100</i></span>
+                <span class="linha-referencia linha-50"><i>50</i></span>
+                <div class="colunas-dias">
+                  <span style="--valor: 60%"><b>60</b><i>SEG</i></span>
+                  <span style="--valor: 85%"><b>85</b><i>TER</i></span>
+                  <span style="--valor: 45%"><b>45</b><i>QUA</i></span>
+                  <span style="--valor: 100%"><b>100</b><i>QUI</i></span>
+                  <span style="--valor: 75%"><b>75</b><i>SEX</i></span>
+                  <span style="--valor: 95%"><b>95</b><i>SÁB</i></span>
+                  <span style="--valor: 60%"><b>60</b><i>DOM</i></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="grafico grafico-materias">
+              <div class="titulo-grafico">
+                <span>
+                  <small>Distribuição do tempo</small>
+                  <h3>Tempo por matéria</h3>
+                </span>
+                <span class="unidade-grafico">total: 8h40</span>
+              </div>
+
+              <div class="lista-materias">
+                <div>
+                  <span><i class="cor-azul"></i>Matemática</span>
+                  <b>2h10</b>
+                  <span class="barra-materia"><i class="fundo-azul" style="--largura: 100%"></i></span>
+                </div>
+                <div>
+                  <span><i class="cor-laranja"></i>Física</span>
+                  <b>1h45</b>
+                  <span class="barra-materia"><i class="fundo-laranja" style="--largura: 81%"></i></span>
+                </div>
+                <div>
+                  <span><i class="cor-verde"></i>Química</span>
+                  <b>1h30</b>
+                  <span class="barra-materia"><i class="fundo-verde" style="--largura: 69%"></i></span>
+                </div>
+                <div>
+                  <span><i class="cor-roxa"></i>Português</span>
+                  <b>1h40</b>
+                  <span class="barra-materia"><i class="fundo-roxo" style="--largura: 77%"></i></span>
+                </div>
+                <div>
+                  <span><i class="cor-cinza"></i>História</span>
+                  <b>1h35</b>
+                  <span class="barra-materia"><i class="fundo-cinza" style="--largura: 73%"></i></span>
+                </div>
+              </div>
+            </article>
+
+            <article class="grafico grafico-mensal">
+              <div class="titulo-grafico">
+                <span>
+                  <small>Resumo do mês</small>
+                  <h3>Tempo registrado por semana</h3>
+                </span>
+                <span class="unidade-grafico">julho</span>
+              </div>
+
+              <div
+                class="grafico-semanas"
+                role="img"
+                aria-label="Tempo registrado: 5 horas e 30 minutos na semana 1, 6 horas e 20 minutos na semana 2, 7 horas e 15 minutos na semana 3 e 8 horas e 40 minutos na semana 4"
+              >
+                <div class="escala-semanas" aria-hidden="true">
+                  <span>10h</span>
+                  <span>5h</span>
+                  <span>0h</span>
+                </div>
+
+                <div class="colunas-semanas">
+                  <span style="--valor: 55%">
+                    <b>5h30</b>
+                    <i>Semana 1</i>
+                  </span>
+                  <span style="--valor: 63%">
+                    <b>6h20</b>
+                    <i>Semana 2</i>
+                  </span>
+                  <span style="--valor: 72%">
+                    <b>7h15</b>
+                    <i>Semana 3</i>
+                  </span>
+                  <span class="semana-atual" style="--valor: 87%">
+                    <b>8h40</b>
+                    <i>Semana 4</i>
+                  </span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé sem páginas ou links que ainda não existem no projeto. -->
+  <footer class="rodape">
+    <div class="limite rodape-conteudo">
+      <a class="marca marca-rodape" href="#inicio" aria-label="Voltar ao início">
+        <span class="marca-icone">
+          <img
+            src="../Fotos/86339240-b0dc-45f5-89c9-55a1a69593fa.png"
+            alt=""
+          >
+        </span>
+        <span>Flinxgu</span>
+      </a>
+
+      <p>&copy; 2026 Flinxgu. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="apresentacao.js" defer></script>
+</body>
+</html>

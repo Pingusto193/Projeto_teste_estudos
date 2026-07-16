@@ -56,6 +56,48 @@ app.post("/user", async (req, res) => {
     res.status(500).json({ error: "Erro ao criar usuário" });
   }
 });
+app.post("/login", async (req, res) => {
+  const { email, senha } = req.body;
+
+  // Antes de consultar o banco, confere se os dados foram enviados.
+  if (!email || !senha) {
+    return res.status(400).json({
+      error: "E-mail e senha são obrigatórios."
+    });
+  }
+
+  try {
+    // O e-mail é único no banco, então findUnique encontra uma conta.
+    const user = await prisma.user.findUnique({
+      where: {
+        email
+      }
+    });
+
+    // A mensagem não revela qual dos dois campos está errado.
+    if (!user || user.senha !== senha) {
+      return res.status(401).json({
+        error: "E-mail ou senha incorretos."
+      });
+    }
+
+    // Nunca envia a senha de volta para o navegador.
+    res.json({
+      message: "Login realizado com sucesso.",
+      user: {
+        id: user.id,
+        nome: user.nome,
+        email: user.email
+      }
+    });
+  } catch (error) {
+    console.error("Erro ao realizar login:", error);
+    res.status(500).json({
+      error: "Erro interno ao realizar login."
+    });
+  }
+});
+
 app.delete("/user/:id", async (req, res) => {
   const id = Number(req.params.id);
   try { 
